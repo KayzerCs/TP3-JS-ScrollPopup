@@ -8,29 +8,34 @@
 
 // Bonus : quand on clicke sur la popup elle disparait pour toujours
 
-const navbar = document.querySelector("nav");
-let popup1 = document.getElementById("imgImprovise");
-let popup2 = document.getElementById("popup");
-let close = document.getElementById("closeBtn");
+let playOne = true;
 
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 10) {
-    navbar.style.height = "70px";
+
+  //Navbar
+  if (window.scrollY > 50) {
+    navbar.style.height = "45px";
   } else {
     navbar.style.height = "90px";
   }
 
-  if (window.scrollY > 200) {
-    popup1.style.transform = "translateX(1px)";
-    popup1.style.opacity = 1;
+  let scrollValue =
+    (window.scrollY + window.innerHeight) / document.body.offsetHeight;
+  //Image
+  if (scrollValue > 0.45) {
+    imgImprovise.style.opacity = 1;
+    imgImprovise.style.transform = "none";
   }
-
-  if (window.scrollY > 1000) {
-    popup2.style.transform = "translateX(1px)";
-    popup2.style.opacity = 1;
+  //Popup
+  if (scrollValue > 0.85 && playOne) {
+    popup.style.opacity = 1;
+    popup.style.transform = "none";
+    playOne = false;
   }
 });
 
-close.addEventListener("click", () => {
-  popup2.remove();
+closeBtn.addEventListener("click", () => {
+  popup.style.opacity = 0;
+  popup.style.transform = "translateX(500px)";
+  
 });
